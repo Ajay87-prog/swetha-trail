@@ -1,0 +1,51 @@
+<html>
+  <head>
+    <style>
+      .AI, .DS {
+        width: 250px;
+        height: 430px;
+        background-color: rgba(128, 128, 128, 0.719);
+        position: absolute;
+        top: 2%;
+        border-radius: 20px;
+        color: black;
+        box-shadow: 20%;
+      }
+      .AI {
+        left: 3%;
+      }
+      .DS {
+        left: 32%;
+      }
+    </style>
+    <script>
+      // Function to add items to cart
+      function addToCart(name, price) {
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+        cart.push({ name: name, price: price });
+        localStorage.setItem('cart', JSON.stringify(cart));
+        alert(name + " has been added to the cart!");
+      }
+    </script>
+  </head>
+  <body>
+    <div class="AI">
+      <div style="margin-left:10%;">
+        <img style=" margin-top:10%; width:180px; height:200px;" src="https://d1m75rqqgidzqn.cloudfront.net/wp-data/2019/12/18154107/image-2.jpeg">
+        <h1 style=" margin-top: 0%;">Artificial Intelligence</h1>
+        <p style="color:rgba(0, 0, 0, 0.719);margin-top: -10%;font-size: small;">– By Stuart Russell & Peter Norvig</p>
+        <h2>Rs.3,750</h2>
+        <button style="background-color: orange;width: 100px;height: 35px;margin-left: 40px;border-radius: 5px;" onclick="addToCart('Artificial Intelligence', 3750)">Add to cart</button>
+      </div>
+    </div>
+    <div class="DS">
+      <div style="margin-left:10%;">
+        <img style=" margin-top:10%; width:180px; height:200px;" src="https://lh4.googleusercontent.com/HSD0yq-L3R-HZRneYrs1DfJopSAw9HRBy40sRb7XF6kYL4asbNZgEGv69ARrM3jVU7oNvll4gGb5FQzWTsk-E3gAP6VeHuvC55lPQNN9a2HZxmjVhdB0XPMu5Z1wKo8azcrhCuXi-EW0Cdxn5rN00qYj5tHbl4QFx29PaA52cf-fifBGQTVwTsMmBw">
+        <h1 style=" margin-top: 5%;">Data Science</h1>
+        <p style="color:rgba(0, 0, 0, 0.719);margin-top: -10%;font-size: small;">– By Andrew Park</p>
+        <h2>Rs.3,050</h2>
+        <button style="background-color: orange;width: 100px;height: 35px;margin-left: 40px;border-radius: 5px;" onclick="addToCart('Data Science', 3050)">Add to cart</button>
+      </div>
+    </div>
+  </body>
+</html>

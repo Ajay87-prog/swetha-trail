@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Your Cart - SRKR Books Store</title>
+  <style>
+    body {
+      background-color: #f4f4f4;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    .cart-container {
+      background-color: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+      max-width: 800px;
+      margin: 0 auto;
+    }
+    .cart-header {
+      text-align: center;
+      margin-bottom: 30px;
+    }
+    .cart-items {
+      margin-bottom: 30px;
+    }
+    .cart-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid #ddd;
+      padding: 15px 0;
+    }
+    .cart-item:last-child {
+      border-bottom: none;
+    }
+    .cart-item h3 {
+      margin: 0;
+      font-size: 20px;
+      color: #333;
+    }
+    .cart-item p {
+      margin: 5px 0;
+      font-size: 16px;
+      color: #666;
+    }
+    .remove-btn {
+      background-color: red;
+      color: #fff;
+      border: none;
+      padding: 8px 12px;
+      border-radius: 5px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+    .remove-btn:hover {
+      background-color: darkred;
+    }
+    .total-price {
+      text-align: right;
+      font-size: 22px;
+      font-weight: bold;
+      color: #333;
+    }
+    .empty-cart {
+      text-align: center;
+      font-size: 20px;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+  <div class="cart-container">
+    <h1 class="cart-header">Your Cart</h1>
+    <div class="cart-items"></div>
+    <div class="total-price">Total: Rs.<span id="totalAmount">0</span></div>
+  </div>
+
+  <script>
+    // Function to display the cart items on the cart page
+    function displayCart() {
+      const cartItemsContainer = document.querySelector('.cart-items');
+      const totalAmountEl = document.getElementById('totalAmount');
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      let total = 0;
+
+      // Clear existing items
+      cartItemsContainer.innerHTML = '';
+
+      if (cart.length === 0) {
+        cartItemsContainer.innerHTML = '<p class="empty-cart">Your cart is empty.</p>';
+        totalAmountEl.innerText = '0';
+        return;
+      }
+
+      // Loop through each item in the cart
+      cart.forEach((item, index) => {
+        const cartItemDiv = document.createElement('div');
+        cartItemDiv.classList.add('cart-item');
+
+        cartItemDiv.innerHTML = `
+          <div>
+            <h3>${item.name}</h3>
+            <p>Price: Rs.${item.price}</p>
+          </div>
+          <button class="remove-btn" onclick="removeFromCart(${index})">Remove</button>
+        `;
+
+        cartItemsContainer.appendChild(cartItemDiv);
+        total += item.price;
+      });
+
+      // Display total price
+      totalAmountEl.innerText = total;
+    }
+
+    // Function to remove items from the cart
+    function removeFromCart(index) {
+      let cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const removedItem = cart.splice(index, 1)[0];
+      localStorage.setItem('cart', JSON.stringify(cart));
+      alert(removedItem.name + ' has been removed from your cart.');
+      displayCart();
+    }
+
+    // Call displayCart on page load
+    window.onload = displayCart;
+  </script>
+</body>
+</html>
